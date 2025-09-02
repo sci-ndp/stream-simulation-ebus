@@ -1,0 +1,10 @@
+requests
+bs4
+ndp_ep
+pandas
+msgpack
+blosc
+kafka-python
+confluent-kafka
+python-dotenv
+scidx_streaming
