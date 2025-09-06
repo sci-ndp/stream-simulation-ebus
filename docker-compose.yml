@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  streamer:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./kafka_topic_script.py:/app/kafka_topic_script.py:ro
+      - ./requirements.txt:/app/requirements.txt:ro
+      - ./.env:/app/.env:ro
+    command: bash -lc "pip install -r requirements.txt && python kafka_topic_script.py"
+    restart: unless-stopped
