@@ -9,7 +9,7 @@ from kafka import KafkaProducer
 from dotenv import load_dotenv
 import os
 import time
-import re
+from helper_func import generate_resource_name
 
 # ---- Configuration ----
 load_dotenv(override=True)
@@ -18,22 +18,6 @@ load_dotenv(override=True)
 KAFKA_HOST = os.getenv("KAFKA_HOST")
 KAFKA_PORT = os.getenv("KAFKA_PORT")
 BOOTSTRAP = f"{KAFKA_HOST}:{KAFKA_PORT}"
-CHUNK_SIZE = 25_000  # starting rows per message
-SOFT_CAP_BYTES = 950_000  # stay under common 1MB broker limit
-
-def generate_resource_name(url: str) -> str:
-    path = up.urlparse(url).path
-    fname = path.split('/')[-1] or "resource"
-    # lowercase + ascii-only (drop non-ascii)
-    fname = fname.encode("ascii", "ignore").decode("ascii").lower()
-    # replace any disallowed char with '-'
-    fname = re.sub(r'[^a-z0-9_-]+', '-', fname)
-    # collapse repeats and trim separators
-    fname = re.sub(r'[-_]{2,}', '-', fname).strip('-_')
-    # fallback if empty after sanitization
-    if not fname:
-        fname = "resource"
-    return fname
 
 
 def stream_register(url: str): 
