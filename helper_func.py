@@ -211,6 +211,27 @@ def register_kafka(urls: List[str] = None, org_name: str = "stream-simulation-eb
             "kafka_host": KAFKA_HOST,
             "kafka_port": KAFKA_PORT,
             "dataset_description": f"The kafka stream is generated from csv dataset. {generate_description_for_file_from_url(url)}",
+            # "extras": {
+            #     "auto_offset_reset": "latest",
+            # },
+            "mapping":{
+                # "time": "Timestamp",
+                # "lat": "Latitude",
+                # "lon": "Longitude",
+                # "pm1": "ES405_PM1_Concentration",
+                # "pm2.5": "ES405_PM2.5_Concentration",
+                # "pm4": "ES405_PM4_Concentration",
+                # "pm10": "ES405_PM10_Concentration",
+                # "o3": "2B_Ozone_Concentration",
+                # "pm2.5_flag": "PM2.5_Data_Flagged",
+                # "o3_flag": "Ozone_Data_Flagged"
+                # "time": "times",
+                # "pm2.5": "PM2.5",
+                # "pm10": "PM10",
+                # "o3": "O3",
+                # "pmf": "PMF",
+                # "o3f": "O3F"
+            }
         }
 
         # Call the register_kafka_topic method to add the Kafka topic

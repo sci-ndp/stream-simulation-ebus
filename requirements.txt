@@ -9,3 +9,4 @@ confluent-kafka
 python-dotenv
 scidx_streaming
 matplotlib
+lz4
