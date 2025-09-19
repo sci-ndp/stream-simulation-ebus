@@ -28,7 +28,8 @@ def stream_register(filepath: str):
     # Configure Kafka producer
     producer = KafkaProducer(
         bootstrap_servers=BOOTSTRAP,
-        value_serializer=lambda v: json.dumps(v).encode("utf-8")
+        value_serializer=lambda v: json.dumps(v).encode("utf-8"),
+        connections_max_idle_ms=2000
     )
 
     try:
@@ -44,7 +45,8 @@ def stream_register(filepath: str):
                     # print(f"Sent: {row}")
                     if sent % 100000 == 0:
                         print(f"sent {sent} rows")
-                    time.sleep(0.0001)
+                        producer.flush()
+                    time.sleep(0.001)
             print("All rows sent. Flushing and closing producer...")
             producer.flush()
     except (KeyboardInterrupt, Exception) as e:
