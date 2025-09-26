@@ -46,7 +46,7 @@ def stream_register(filepath: str):
                     if sent % 100000 == 0:
                         print(f"sent {sent} rows")
                         producer.flush()
-                    time.sleep(1)
+                    time.sleep(0.1)
             print("All rows sent. Flushing and closing producer...")
             producer.flush()
     except (KeyboardInterrupt, Exception) as e:

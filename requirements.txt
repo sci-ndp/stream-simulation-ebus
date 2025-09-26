@@ -10,3 +10,5 @@ python-dotenv
 scidx_streaming
 matplotlib
 lz4
+plotly
+nbformat
