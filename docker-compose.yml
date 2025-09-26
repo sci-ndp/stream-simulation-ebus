@@ -1,5 +1,6 @@
 services:
   streamer:
+    container_name: simulated_stream
     image: python:3.11-slim
     working_dir: /app
     volumes:
