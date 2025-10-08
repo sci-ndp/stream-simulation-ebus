@@ -215,7 +215,7 @@ def register_kafka(urls: List[str] = None, org_name: str = "stream-simulation-eb
             #     "auto_offset_reset": "latest",
             # },
             "mapping":{
-                # "time": "Timestamp",
+            #     "time": "times",
                 # "lat": "Latitude",
                 # "lon": "Longitude",
                 # "pm1": "ES405_PM1_Concentration",
