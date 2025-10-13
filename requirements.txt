@@ -13,3 +13,4 @@ lz4
 plotly
 nbformat
 microsoft-aurora
+cdsapi
