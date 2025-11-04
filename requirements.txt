@@ -16,3 +16,4 @@ microsoft-aurora
 cdsapi
 fastmcp
 folium
+sage_data_client
