@@ -18,3 +18,4 @@ fastmcp
 folium
 sage_data_client
 herbie-data
+numpy

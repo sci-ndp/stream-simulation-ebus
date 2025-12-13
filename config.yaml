@@ -7,7 +7,7 @@ region:
 
 dates:
   start: "2025-10-20"
-  end:   "2025-10-22"
+  end:   "2025-10-20"
 
 aurora:
   times:
@@ -57,3 +57,7 @@ stations:
     lat: 40.76623
     lon: -111.84755
     elevation_m: 1480.0   # from previous config
+
+hotspots:
+  pm25_threshold: 5.0   # µg/m³
+  min_cells: 5
