@@ -22,10 +22,8 @@ paths:
   static_pickle: "aurora-0.4-air-pollution-static.pickle"
 
 synoptic:
-  units: "english"
-  vars: ["PM_25_concentration_set_1", "ozone_concentration_set_1", "CO_concentration_set_1", "NO2_concentration_set_1"]
-  topic_prefix: "synoptic"
-  topic_suffix: "aq"
+  vars: ["PM_25_concentration", "ozone_concentration", "CO_concentration", "NO2_concentration"]
+  owner_org: "synoptic"
 
 stations:
   - station_id: "QCV"
