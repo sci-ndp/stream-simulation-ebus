@@ -24,8 +24,11 @@ def station_dataset_metadata(cfg: Dict[str, Any], st: Dict[str, Any]) -> Dict[st
 
     stid = st["station_id"]
     name = st.get("name", stid)
+    region = cfg["region"]["name"]
 
     extras = {
+        "dataset_kind": "sensor",
+        "region": region,
         "station_id": stid,
         "station_name": name,
         "latitude": st.get("lat"),
@@ -79,7 +82,6 @@ def register_all_stations(client: APIClient, streaming: StreamingClient, server:
 
         dataset_metadata = station_dataset_metadata(cfg, st)
         ws_method = station_ws_method(synoptic_token, st, vars_list)
-        client.delete_resource_by_name(dataset_metadata["name"])
         ds = streaming.register_data_source(
             dataset_metadata=dataset_metadata,
             methods=[ws_method],

@@ -25,6 +25,10 @@ synoptic:
   vars: ["PM_25_concentration", "ozone_concentration", "CO_concentration", "NO2_concentration"]
   owner_org: "synoptic"
 
+hotspot:
+  url: https://drive.google.com/file/d/1GxYszOpkDCunEjpfmtMVhMbiFCBDYXYf/view?usp=sharing
+  owner_org: "hotspot"
+
 stations:
   - station_id: "QCV"
     name: "Copperview"
