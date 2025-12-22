@@ -9,6 +9,7 @@ import yaml
 from dotenv import load_dotenv
 from ndp_ep import APIClient
 from scidx_streaming import StreamingClient
+from datetime import datetime, timezone
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("register_synoptic_websockets")
@@ -36,6 +37,7 @@ def station_dataset_metadata(cfg: Dict[str, Any], st: Dict[str, Any]) -> Dict[st
         "elevation_m": st.get("elevation_m"),
         "source": "synoptic_push_websocket",
         "synoptic_vars": ",".join(syn.get("vars", []) or []),
+        "updated_at": datetime.now(timezone.utc).isoformat(),
     }
 
     return {

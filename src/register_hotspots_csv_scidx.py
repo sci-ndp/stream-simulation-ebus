@@ -5,6 +5,7 @@ import yaml
 import logging
 from ndp_ep import APIClient
 from scidx_streaming import StreamingClient
+from datetime import datetime, timezone
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("register_hotspots_csv")
@@ -48,10 +49,11 @@ def main():
         ),
         "owner_org": owner_org,
         "extras": {
-            "dataset_kind": "hotspots",
+            "dataset_kind": "hotspot",
             "region": region,
             "source": "forecast",
             "model": "aurora",
+            "updated_at": datetime.now(timezone.utc).isoformat(),
         },
     }
 
@@ -70,7 +72,7 @@ def main():
         },
     }
 
-
+    client.delete_resource_by_name(dataset_name)
     streaming.register_data_source(
         dataset_metadata=dataset_metadata,
         methods=[method],
