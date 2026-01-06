@@ -137,22 +137,21 @@ def main():
     threshold = float(cfg.get("hotspots", {}).get("pm25_threshold", 35.0))
     min_cells = int(cfg.get("hotspots", {}).get("min_cells", 5))
 
-    out_base = Path("data/processed/hotspots") / region_name
+    out_base = Path("data/processed/hotspots")
     out_base.mkdir(parents=True, exist_ok=True)
 
     for day in dates:
         day_str = day.strftime("%Y-%m-%d")
         pred_csv = (
             Path("data/processed/predictions")
-            / region_name
-            / f"{day_str}_{times_tag}_{lead_hours}h.csv"
+            / f"{day_str}_{times_tag}_{lead_hours}h_{region_name}.csv"
         )
 
         print(f"[event_detection] Processing {pred_csv}")
         events = detect_hotspots_for_day(pred_csv, threshold=threshold, min_cells=min_cells)
         df_events = events_to_dataframe(events)
 
-        out_path = out_base / f"{day_str}_hotspots.csv"
+        out_path = out_base / f"{day_str}_{region_name}_hotspots.csv"
         df_events.to_csv(out_path, index=False)
         print(f"[event_detection] Found {len(df_events)} hotspots → {out_path}")
 
