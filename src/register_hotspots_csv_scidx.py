@@ -72,7 +72,7 @@ def main():
         },
     }
 
-    client.delete_resource_by_name(dataset_name)
+    client.delete_resource_by_name(dataset_name, server=SERVER)
     streaming.register_data_source(
         dataset_metadata=dataset_metadata,
         methods=[method],

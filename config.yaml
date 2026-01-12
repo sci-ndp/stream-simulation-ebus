@@ -26,7 +26,7 @@ synoptic:
   owner_org: "synoptic"
 
 hotspot:
-  url: https://drive.google.com/uc?export=download&id=1GxYszOpkDCunEjpfmtMVhMbiFCBDYXYf
+  url: https://drive.google.com/uc?export=download&id=1YG419lyI9nQgzDLvfayguhe5Sr80_QWk
   owner_org: "hotspot"
 
 stations:
@@ -67,5 +67,7 @@ stations:
   #   elevation_m: 1480.0   # from previous config
 
 hotspots:
-  pm25_threshold: 5.0   # µg/m³
-  min_cells: 5
+  pm25_threshold: 10.0   # µg/m³
+  persistence_k: 3
+  timestep_hours: 1
+  round_decimals: 4

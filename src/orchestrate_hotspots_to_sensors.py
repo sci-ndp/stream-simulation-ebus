@@ -93,7 +93,7 @@ def main():
 
     hotspots = pd.read_csv(hotspot_url)
 
-    required_cols = {"lat_min", "lat_max", "lon_min", "lon_max"}
+    required_cols = {"lat", "lon"}
     missing = required_cols - set(hotspots.columns)
     if missing:
         raise RuntimeError(
@@ -149,14 +149,12 @@ def main():
     has_pm25 = "pm25_max" in hotspots.columns
 
     for _, row in hotspots.iterrows():
-        center_lat = (float(row["lat_min"]) + float(row["lat_max"])) / 2.0
-        center_lon = (float(row["lon_min"]) + float(row["lon_max"])) / 2.0
 
         nearest = None
         best_dist = float("inf")
 
         for s in sensors:
-            d = haversine_km(center_lat, center_lon, s["lat"], s["lon"])
+            d = haversine_km(row["lat"], row["lon"], s["lat"], s["lon"])
             if d < best_dist:
                 best_dist = d
                 nearest = s

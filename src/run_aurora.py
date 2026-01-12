@@ -36,7 +36,7 @@ def main():
     )
 
     # Paths
-    cams_dir = Path(paths_cfg["cams_download"]).expanduser()
+    cams_dir = (project_root / Path(paths_cfg["cams_download"])).expanduser().resolve()
     static_path = cams_dir / paths_cfg["static_pickle"]
 
     out_dir = project_root / "data/processed/predictions"

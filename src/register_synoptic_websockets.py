@@ -84,6 +84,7 @@ def register_all_stations(client: APIClient, streaming: StreamingClient, server:
 
         dataset_metadata = station_dataset_metadata(cfg, st)
         ws_method = station_ws_method(synoptic_token, st, vars_list)
+        client.delete_resource_by_name(dataset_metadata["name"], server=server)
         ds = streaming.register_data_source(
             dataset_metadata=dataset_metadata,
             methods=[ws_method],
