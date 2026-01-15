@@ -68,6 +68,6 @@ stations:
 
 hotspots:
   pm25_threshold: 10.0   # µg/m³
-  persistence_k: 3
+  persistence_k: 1
   timestep_hours: 1
   round_decimals: 4

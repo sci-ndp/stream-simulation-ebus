@@ -68,6 +68,9 @@ def detect_hotspots_for_day(
 
     # Sort so streak logic works correctly
     df = df.sort_values(["cell_id", "timestamp"])
+    num_cells = df["cell_id"].nunique()
+    print(f"[event_detection] Unique grid cells evaluated: {num_cells}")
+
 
     expected_dt = pd.Timedelta(hours=timestep_hours)
 

@@ -20,3 +20,6 @@ sage_data_client
 herbie-data
 numpy
 websocket-client
+cartopy
+shapely
+pyproj

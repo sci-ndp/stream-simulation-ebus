@@ -128,7 +128,7 @@ def main():
         try:
             sensors.append(
                 {
-                    "dataset": ds.get("name"),
+                    "name": ds.get("name"),
                     "station_id": extras.get("station_id"),
                     "lat": float(lat),
                     "lon": float(lon),
@@ -146,7 +146,9 @@ def main():
     # 3) For each hotspot, find nearest sensor
     # ------------------------------------------------------------------
     has_ts = "timestamp" in hotspots.columns
-    has_pm25 = "pm25_max" in hotspots.columns
+    has_pm25 = "pm25" in hotspots.columns
+
+    rows = []
 
     for _, row in hotspots.iterrows():
 
@@ -162,13 +164,37 @@ def main():
         if nearest is None:
             continue
 
-        ts_part = f"{row['timestamp']} | " if has_ts else ""
-        pm_part = f"PM2.5 max={row['pm25_max']} → " if has_pm25 else "→ "
+        ts_part = f"Timestamp {row['timestamp']} | " if has_ts else ""
+        pm_part = f"PM2.5 {row['pm25']} → " if has_pm25 else "→ "
 
         print(
             f"[HOTSPOT] {ts_part}{pm_part}"
             f"{nearest['station_id']} ({best_dist:.1f} km)"
         )
+        print(nearest)
+        rows.append({
+            "timestamp": row["timestamp"] if has_ts else None,
+            "pm25": row["pm25"] if has_pm25 else None,
+            "hotspot_lat": row["lat"],
+            "hotspot_lon": row["lon"],
+            "station_id": nearest["station_id"],
+            "sensor_name": nearest["name"],
+            "sensor_lat": nearest["lat"],
+            "sensor_lon": nearest["lon"],
+            "distance_km": round(best_dist, 3),
+        })
+
+    project_root = Path(__file__).resolve().parent.parent
+    out_dir = project_root / "data" / "processed" / "map"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    filename = f"{date_str}_{region}_hotspot_sensor_map.csv"
+
+    out_path = out_dir / filename
+    pd.DataFrame(rows).to_csv(out_path, index=False)
+
+    print(f"\nSaved hotspot → sensor mapping to:\n{out_path}")
 
 
 if __name__ == "__main__":
